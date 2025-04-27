@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Form Validation Test</title>
+  <style>
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    input {
+      display: block;
+      margin-bottom: 10px;
+      padding: 8px;
+      width: 250px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <form class="signin__form">
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="name" placeholder="Enter full name">
+    <p class="error error__name"></p>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    const form = document.querySelector('.signin__form');
+    const fullName = document.querySelector('#name');
+    const nameError = document.querySelector('.error__name');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); 
+
+      let isValid = true; 
+
+      // Full name validation
+      if (fullName.value.trim() === '') {
+        fullName.style.borderColor = 'red';
+        nameError.textContent = 'Please enter your full name.';
+        isValid = false;
+      } else if (fullName.value.trim().length < 2) {
+        fullName.style.borderColor = 'red';
+        nameError.textContent = 'Name must be at least 2 characters.';
+        isValid = false;
+      } else {
+        fullName.style.borderColor = 'green';
+        nameError.textContent = '';
+      }
+
+      if (isValid) {
+        console.log('Form is valid. You can submit.');
+        form.submit(); 
+      }
+    });
+  </script>
+
+</body>
+</html>
